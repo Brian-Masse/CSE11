@@ -11,10 +11,14 @@ public class Testing {
 
         System.out.println( "\\exam" );
 
-        Character a = 'a';
+        // Character a = 'a';
 
         int test = 'a' + 1; 
         System.out.println(test);
+
+        "java".toUpperCase();
+
+        Integer.parseInt("g");
         
     }
 
