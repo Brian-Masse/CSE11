@@ -286,21 +286,41 @@ public class Assignment2 {
     // TODO: Complete the method header and the method body
     public static void main(String[] args) {
 
-        createDiamond();
+        int number = 25;
+        boolean isPrime = true;
+        int i = 1;
 
-        if (unitTests()) {
-            System.out.println("All unit tests passed.\n");
-        } else {
-            System.out.println("ERROR: Failed test.\n");
-            return;
+        for (i=2; i < number &&isPrime; i++) {
+            if (number % i == 0) {
+                isPrime = false;
+            }
         }
 
-        Scanner scanner = new Scanner(System.in); 
-        System.out.println(PROMPT_MSG_NAME);
+        System.out.println( i + " " + isPrime );
 
-        String name = scanner.nextLine();
-        System.out.println( "Hello " + name + "! Nice to meet you and welcome to CSE11." );
 
-        scanner.close();
+
+
+
+        
+
+
+
+        createDiamond();
+
+        // if (unitTests()) {
+        //     System.out.println("All unit tests passed.\n");
+        // } else {
+        //     System.out.println("ERROR: Failed test.\n");
+        //     return;
+        // }
+
+        // Scanner scanner = new Scanner(System.in); 
+        // System.out.println(PROMPT_MSG_NAME);
+
+        // String name = scanner.nextLine();
+        // System.out.println( "Hello " + name + "! Nice to meet you and welcome to CSE11." );
+
+        // scanner.close();
     }
 }
