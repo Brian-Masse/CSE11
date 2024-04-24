@@ -1,3 +1,5 @@
 {
-  "java.debug.settings.onBuildFailureProceed": true
+  "java.debug.settings.onBuildFailureProceed": true,
+
+  "java.project.sourcePaths": ["Assignment2", "Assignment3"]
 }
