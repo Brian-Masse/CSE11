@@ -1,23 +1,19 @@
-/*
- * This is the starter code for Assignment 3 - MuseumManager (CSE 11 SP24)
- * TODO: Remove the comment above, and complete main file header
- */
+// Title:              Assignment3
+// Files:              MuseumManager.java, Selections.java
+// Quarter:            CSE11 Spring 2024
+//
+// Author:             Brian Masse
+// Email:              bmasse@ucsd.edu
+// Instructor's Name:  Ben Ochoa
 
-/**
- * NOTE: YOU SHOULD NOT HAVE TO IMPORT ANY PACKAGES TO COMPLETE THIS
- * ASSIGNMENT. 
- * 
- * If you add extraneous packages (intentionally or not), then your
- * code might fail Gradescope compilation.
- */
-
-// TODO: Complete class header
-
+// Main Class File:    MuseumManager
+// File:               MuseumManager.java
+// Quarter:            CSE11 Spring 2024
+//
+// Author:             Brian Masse
+// Instructor's Name:  Ben Ochoa
 public class MuseumManager {
-
-    // Feel free to create extra variables if necessary.
-
-    /* Variables used for museumSchedule */
+    // MARK: Vars
     // Define exhibit types
     private final static String PAINTINGS = "paintings";
     private final static String SCULPTURES = "sculptures";
@@ -38,8 +34,10 @@ public class MuseumManager {
     private final static double BASE_FEE_25 = 25.0;
     private final static double BASE_FEE_15 = 15.0;
 
+    // MARK: Methods
     // TODO: add methods below
 
+    // MARK: UnitTests
     // TODO: Add more unit tests to ensure correctness of methods.
     public static boolean unitTests() {
         System.out.println(); 
@@ -94,8 +92,10 @@ public class MuseumManager {
         return true;
     }
 
-    // TODO: Complete the method header
     // MARK: Main
+    // main method for MuseumManager.java
+    // what a comment, its almost as if the main method is called the main method, and is 100%
+    // self-explainitory
     public static void main(String[] args) {
 
         if (unitTests()) {

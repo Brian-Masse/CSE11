@@ -7,20 +7,17 @@
 // Instructor's Name:  Ben Ochoa
 
 import java.util.Scanner; // Import the Scanner class
-import java.io.Console;
 import java.lang.Math; // Import the Math class
 
 // Main Class File:    Assignment2
 // File:               Assignment2.java
-// Quarter:            (course) (quarter) (year)
+// Quarter:            CSE11 Spring 2024
 //
 // Author:             Brian Masse
 // Instructor's Name:  Ben Ochoa
 public class Assignment2 {
-
     private final static String PROMPT_MSG_NAME =
             "Please enter your name.";
-
      
     // this rounds off a double to the desired number of digits
     public static double truncateDouble( double value, int digits ) {
@@ -291,10 +288,7 @@ public class Assignment2 {
         return;
     }
 
-    // TODO: Complete the method header and the method body
     public static void main(String[] args) {
-
-        Math.random
 
         createDiamond();
 
@@ -305,12 +299,12 @@ public class Assignment2 {
             return;
         }
 
-        // Scanner scanner = new Scanner(System.in); 
-        // System.out.println(PROMPT_MSG_NAME);
+        Scanner scanner = new Scanner(System.in); 
+        System.out.println(PROMPT_MSG_NAME);
 
-        // String name = scanner.nextLine();
-        // System.out.println( "Hello " + name + "! Nice to meet you and welcome to CSE11." );
+        String name = scanner.nextLine();
+        System.out.println( "Hello " + name + "! Nice to meet you and welcome to CSE11." );
 
-        // scanner.close();
+        scanner.close();
     }
 }
