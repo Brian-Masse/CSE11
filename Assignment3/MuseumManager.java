@@ -35,58 +35,183 @@ public class MuseumManager {
     private final static double BASE_FEE_15 = 15.0;
 
     // MARK: Methods
-    // TODO: add methods below
+    // convenience function to check the day of the week
+    public static boolean checkDayOfWeek( int dayOfWeek ) {
+        boolean isValid = !( dayOfWeek < 0 || dayOfWeek > 6 );
+        if (!isValid) { System.out.println( INVALID_WEEK ); }
+        return isValid;
+    }
+
+    // returns a string representing the available displays depending on the day of the week, if its a holiday, 
+    // and if the person is a member
+    public static void museumSchedule( int dayOfWeek, boolean isMember, boolean isHoliday ) {
+        if (!checkDayOfWeek(dayOfWeek)) { return; }
+        if (isHoliday) { 
+            System.out.println(CLOSED);
+            return;
+         }
+
+        if ( dayOfWeek % 2 == 0 ) {
+            System.out.println( TODAYS_EXHIBITS + "\n" + PAINTINGS + "\n" + SCULPTURES );
+            if (isMember) { System.out.println( REN_ART ); }
+        }
+        else if ( dayOfWeek % 2 != 0 ) {
+            System.out.println( TODAYS_EXHIBITS + "\n" + PHOTOGRAPHS + "\n" + ARTIFACTS );
+            if (isMember) { System.out.println( MOD_INST ); }
+        }
+    }
+
+    // returns a message describing what tours are running at the current time
+    public static String guideTour(int dayOfWeek, int hourOfDay) {
+        if ( hourOfDay < 0 || hourOfDay > 23 || dayOfWeek < 0 || dayOfWeek > 6 ) { return INVALID_INPUT; }
+
+        if      ( hourOfDay >= 10 && hourOfDay <= 12 ) { return "Guiding the tour of " + PAINTINGS + " and " + SCULPTURES; }
+        else if ( hourOfDay >= 14 && hourOfDay <= 16 ) { return "Guiding the tour of " + PHOTOGRAPHS + " and " + ARTIFACTS; }
+        else { return NO_TOURS;  }
+    }
+
+    // calculates the final admission fee depending on a guests age, memberstatus, and weekday
+    public static double calcAdmissionFee( int dayOfWeek, int age, boolean isMember ) {
+        if ( !checkDayOfWeek(dayOfWeek) ) { return 0; }
+        if ( age <= 4 ) { return 0; }
+
+        double discount = isMember ? 0.80 : 1;
+        double surcharge = (dayOfWeek == 0 || dayOfWeek == 6) ? 4 : 0;
+
+        if ( age >= 5 && age <= 16 )    { return BASE_FEE_10 * discount + surcharge; }
+        if ( age >= 17 && age <= 60 )   { return BASE_FEE_25 * discount + surcharge; }
+        if ( age > 60 )                 { return BASE_FEE_15 * discount + surcharge; }
+
+        return 0;
+    }
+
+    // MARK: Convenience Methods
+    // this rounds off a double to the desired number of digits
+    public static double truncateDouble( double value, int digits ) {
+        return Math.round(value * Math.pow( 10, digits )) / Math.pow(10, digits);
+    }
+
+    // this makes testing a method that returns a double more consistent and easier to code
+    //  it is purely for convenience, it does not do anything different than standard implementation
+    public static Boolean testDoubleMethod( String methodName, int testNumber, double output, double expectedOutput ) {
+        double roundedOutput = truncateDouble(output, 2);
+        double roundedExpectedOutput = truncateDouble(expectedOutput, 2);
+
+        System.out.println( "  " + methodName + " " + testNumber + ": " + output + "\n" );
+
+        if (roundedExpectedOutput != roundedOutput) {
+            System.out.println( "FAILED: " + methodName + " " + testNumber );
+            return false;
+        }
+        return true; 
+    }
+
+    // similar to the testDoubleMethod, this tests whether an actual string matches an expected output, and returns it as a boolean
+    public static Boolean testStringMethod( String methodName, int testNumber, String output, String expectedOutput ) {
+        System.out.println( "  " + methodName + " " + testNumber + ": " + output + "\n" );
+        if (!output.equals(expectedOutput)) {
+            System.out.println( "FAILED: " + methodName + " " + testNumber );
+            return false;
+        }
+        return true; 
+    }
+
+    // similar to the testStringMethod, this simply prints out the expected result, propertly formated, to compare it to an actual printed value
+    public static void testVoidMethod( String methodName, int testNumber, String expectedOutput) {
+        System.out.println("\n  Expected " + methodName + " " + testNumber +":\n\n" + expectedOutput);
+        System.out.println("  ---------------------\n");
+        System.out.println( "  " + methodName + " Output " + testNumber + ":\n");
+    }
+
 
     // MARK: UnitTests
-    // TODO: Add more unit tests to ensure correctness of methods.
     public static boolean unitTests() {
         System.out.println(); 
 
         // Test(s) for museumSchedule
-        // Test case 1: dayOfWeek = 3, isMember = true, isHoliday = false
-        int museumSchedDay1 = 3;
-        boolean museumSchedMember1 = true;
-        boolean museumSchedHoliday1 = false;
-        String expectedSchedule1 = "Today's exhibits:\nphotographs\n" + 
-            "artifacts\nmodern installations\n"; 
-        System.out.println("Expected museumSchedule Output 1:\n");
-        System.out.println(expectedSchedule1);
-        System.out.println("-----------------");
-        System.out.println("museumSchedule Output 1:\n");
-        museumSchedule(museumSchedDay1, museumSchedMember1, 
-            museumSchedHoliday1);
-        System.out.println();
+        // test case 1
+        int museumSchedDay = 3;
+        boolean museumSchedMember = true;
+        boolean museumSchedHoliday = false;
+        String expectedSchedule = "Today's exhibits:\nphotographs\n" + 
+            "artifacts\nmodern installations"; 
 
-        // Test case 2: ...
-        // ...
+        testVoidMethod("museumSchedule", 1, expectedSchedule);
+        museumSchedule(museumSchedDay, museumSchedMember, museumSchedHoliday);
+
+        // Test case 2
+        museumSchedDay = 4;
+        museumSchedMember = false;
+        museumSchedHoliday = false;
+        expectedSchedule = "Today's exhibits:\npaintings\n" + 
+            "sculptures"; 
+
+        testVoidMethod("museumSchedule", 2, expectedSchedule);
+        museumSchedule(museumSchedDay, museumSchedMember, museumSchedHoliday);
+
+        // Test case 3
+        museumSchedHoliday = true;
+        expectedSchedule = "Museum is closed due to holiday"; 
+
+        testVoidMethod("museumSchedule", 3, expectedSchedule);
+        museumSchedule(museumSchedDay, museumSchedMember, museumSchedHoliday);
+
+        System.out.println( "\n" );
 
 
         // Test(s) for guideTour
-        // Test case 1: dayOfWeek = 5, hourOfDay = 11
-        String actualTour1 = guideTour(5, 11);
-        System.out.println("guideTour Output 1: " + actualTour1);
-        if (!actualTour1.equals(
-                "Guiding the tour of paintings and sculptures")) {
-            System.out.println("FAILED: guideTour 1");
-            return false;
-        }
+        // test case 1
+        int dayOfWeek = 5;
+        int hourOfDay = 11;
+        String expectedString = "Guiding the tour of paintings and sculptures";
+        String actualTour = guideTour(dayOfWeek, hourOfDay);
 
-        // Test case 2: ...
-        // ...
+        if (!testStringMethod("guideTour", 1, expectedString, actualTour)) { return false; }
+
+        // test case 2
+        dayOfWeek = 2;
+        hourOfDay = 15;
+        expectedString = "Guiding the tour of photographs and artifacts";
+        actualTour = guideTour(dayOfWeek, hourOfDay);
+
+        if (!testStringMethod("guideTour", 2, expectedString, actualTour)) { return false; }
+
+        // test case 3
+        dayOfWeek = 4;
+        hourOfDay = 9;
+        expectedString = NO_TOURS;
+        actualTour = guideTour(dayOfWeek, hourOfDay);
+
+        if (!testStringMethod("guideTour", 3, expectedString, actualTour)) { return false; }
+
 
 
         // Test(s) for calcAdmissionFee
-        // Test case 1: dayOfWeek = 6, age = 45, isMember = true
-        double actualFee1 = calcAdmissionFee(6, 45, true);
-        System.out.println("calcAdmissionFee Output 1: " + actualFee1);
+        // Test case 1
+        dayOfWeek = 6;
+        int age = 45;
+        boolean isMember = true;
+        double expectedFee = 24;
+        double actualFee = calcAdmissionFee(dayOfWeek, age, isMember);
 
-        if (actualFee1 != 24.0) {
-            System.out.println("FAILED: calcAdmissionFee 1");
-            return false;
-        }
+        if ( !testDoubleMethod("calcAdmissionFee", 1, actualFee, expectedFee) ) { return false; }
 
-        // Test case 2: ...
-        // ...
+        // Test case 2
+        dayOfWeek = 0;
+        age = 4;
+        expectedFee = 0;
+        actualFee = calcAdmissionFee(dayOfWeek, age, isMember);
+
+        if ( !testDoubleMethod("calcAdmissionFee", 2, actualFee, expectedFee) ) { return false; }
+
+        // Test case 3
+        dayOfWeek = 4;
+        age = 61;
+        isMember = false;
+        expectedFee = BASE_FEE_15;
+        actualFee = calcAdmissionFee(dayOfWeek, age, isMember);
+
+        if ( !testDoubleMethod("calcAdmissionFee", 3, actualFee, expectedFee) ) { return false; }
 
         // All test cases passed
         return true;
@@ -94,8 +219,7 @@ public class MuseumManager {
 
     // MARK: Main
     // main method for MuseumManager.java
-    // what a comment, its almost as if the main method is called the main method, and is 100%
-    // self-explainitory
+    // what a comment, its almost as if the main method is called the main method, and is 100% self-explainitory
     public static void main(String[] args) {
 
         if (unitTests()) {
