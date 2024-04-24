@@ -283,8 +283,18 @@ public class Assignment2 {
         return true;
     }
 
+    public static void test(int t, double t2) {
+        Math.pow( 2, 4 );
+    }
+
+    public static void test(double t, int t2) {
+        return;
+    }
+
     // TODO: Complete the method header and the method body
     public static void main(String[] args) {
+
+        Math.random
 
         createDiamond();
 
@@ -295,12 +305,12 @@ public class Assignment2 {
             return;
         }
 
-        Scanner scanner = new Scanner(System.in); 
-        System.out.println(PROMPT_MSG_NAME);
+        // Scanner scanner = new Scanner(System.in); 
+        // System.out.println(PROMPT_MSG_NAME);
 
-        String name = scanner.nextLine();
-        System.out.println( "Hello " + name + "! Nice to meet you and welcome to CSE11." );
+        // String name = scanner.nextLine();
+        // System.out.println( "Hello " + name + "! Nice to meet you and welcome to CSE11." );
 
-        scanner.close();
+        // scanner.close();
     }
 }

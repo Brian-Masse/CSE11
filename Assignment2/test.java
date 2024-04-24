@@ -1,21 +1,30 @@
-public class test<E> {
+// import java.lang.reflect.Array;
+
+// public class test<E> {
  
-    class Node<E> {
+//     class Node<E> {
 
-        E value;
+//         E value;
 
-        public Node( E value ) {
-            this.value = value;
-        }
+//         public Node( E value ) {
+//             this.value = value;
+//         }
 
-    }
+//     }
 
-    public static void main (String[] args) {
+//     public test () {
+//         E[] test = (E[]) Array.newInstance( Node<E>, 5);
+//     }
+
+//     public static void main (String[] args) {
 
 
 
-    }
 
 
 
-}
+//     }
+
+
+
+// }
