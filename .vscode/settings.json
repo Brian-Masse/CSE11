@@ -1,6 +1,12 @@
 {
   "java.debug.settings.onBuildFailureProceed": true,
 
-  "java.project.sourcePaths": ["Assignment2", "Assignment3", ".", "PA1"],
+  "java.project.sourcePaths": [
+    "Assignment2",
+    "Assignment3",
+    "Assignment4",
+    ".",
+    "PA1"
+  ],
   "java.project.referencedLibraries": []
 }
