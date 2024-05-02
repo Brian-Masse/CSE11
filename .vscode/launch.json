@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Test",
+      "request": "launch",
+      "mainClass": "Test",
+      "projectName": "CSE12_61c16c7b"
+    },
+    {
+      "type": "java",
       "name": "FunWithArrays",
       "request": "launch",
       "mainClass": "FunWithArrays",

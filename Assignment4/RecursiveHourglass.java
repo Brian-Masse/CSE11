@@ -74,10 +74,13 @@ public class RecursiveHourglass {
         output = recursiveHourglass('u', 10, 0);
         if (!testStringMethod("recursiveHourglass", 3, expected, output)) { return false; }
 
-        System.out.println( recursiveHourglass('/', 101, 0) );
+        System.out.println( recursiveHourglass('/', 15, 0) );
 
         return true; 
     }
+
+    
+    int x;
 
     // MARK: Main
     // the main starting point of this file + host of the unit tests
@@ -88,5 +91,17 @@ public class RecursiveHourglass {
             System.out.println("ERROR: Failed test.\n");
             return;
         }
+        
+        
     }
+}
+
+class Test {
+
+    boolean test;
+
+    Test(String t) {
+        System.out.println( test );
+    }
+
 }

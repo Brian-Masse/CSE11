@@ -220,13 +220,42 @@ public class MuseumManager {
     // MARK: Main
     // main method for MuseumManager.java
     // what a comment, its almost as if the main method is called the main method, and is 100% self-explainitory
+    static int x = 0;
+    static int j = 0;
+
     public static void main(String[] args) {
 
-        if (unitTests()) {
-            System.out.println("All unit tests passed.\n");
-        } else {
-            System.out.println("ERROR: Failed test.\n");
-            return;
+        int x = 5; 
+        {
+            int j = 2; 
+            System.out.println( j + x );
         }
+
+        // if (unitTests()) {
+        //     System.out.println("All unit tests passed.\n");
+        // } else {
+        //     System.out.println("ERROR: Failed test.\n");
+        //     return;
+        // }
     }
+}
+
+class Test {
+
+    java.util.Date date;
+
+    static int x = 0;
+
+    public static void main(String[] args) {
+        int n = 2;
+        int x = 5;
+        
+        System.out.println( x );
+
+    }
+
+    void xMethod(int n) {
+        n++;
+    }
+
 }
