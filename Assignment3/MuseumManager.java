@@ -220,15 +220,24 @@ public class MuseumManager {
     // MARK: Main
     // main method for MuseumManager.java
     // what a comment, its almost as if the main method is called the main method, and is 100% self-explainitory
-    static int x = 0;
+    static int i = 0;
     static int j = 0;
+
+    public MuseumManager(double i) {
+
+    }
+
+    public MuseumManager() {
+        this(1);
+    }
 
     public static void main(String[] args) {
 
-        int x = 5; 
+        int i = 2;
+
         {
-            int j = 2; 
-            System.out.println( j + x );
+            int j = 3; 
+            System.out.println( j + i );
         }
 
         // if (unitTests()) {
@@ -242,20 +251,20 @@ public class MuseumManager {
 
 class Test {
 
-    java.util.Date date;
+    private double i;
 
-    static int x = 0;
-
-    public static void main(String[] args) {
-        int n = 2;
-        int x = 5;
-        
-        System.out.println( x );
-
+    public Test(double i) {
+        t();
+        i = i;
     }
 
-    void xMethod(int n) {
-        n++;
+    public Test() {
+        this(1);
+        System.out.println("Default Constructor");
+    }
+
+    public void t() {
+        System.out.println("Invokign t");
     }
 
 }
