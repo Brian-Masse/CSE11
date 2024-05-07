@@ -223,22 +223,23 @@ public class MuseumManager {
     static int i = 0;
     static int j = 0;
 
-    public MuseumManager(double i) {
-
-    }
-
-    public MuseumManager() {
-        this(1);
+    private static void change( String s ) {
+        s = s + "HTML";
     }
 
     public static void main(String[] args) {
 
-        int i = 2;
 
-        {
-            int j = 3; 
-            System.out.println( j + i );
-        }
+        String s1 = "hih";
+        String s2 = s1;
+
+        StringBuilder buffer =  new StringBuilder(4);
+        buffer.append( "hello" );
+
+        buffer.reverse();
+
+        System.out.println(buffer.charAt(buffer.length() - 1));
+
 
         // if (unitTests()) {
         //     System.out.println("All unit tests passed.\n");
@@ -255,7 +256,8 @@ class Test {
 
     public Test(double i) {
         t();
-        i = i;
+        
+        
     }
 
     public Test() {
