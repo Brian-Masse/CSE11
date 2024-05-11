@@ -12,6 +12,7 @@
 //
 // Author:             Brian Masse
 // Instructor's Name:  Ben Ochoa
+
 public class MuseumManager {
     // MARK: Vars
     // Define exhibit types
@@ -220,53 +221,12 @@ public class MuseumManager {
     // MARK: Main
     // main method for MuseumManager.java
     // what a comment, its almost as if the main method is called the main method, and is 100% self-explainitory
-    static int i = 0;
-    static int j = 0;
-
-    private static void change( String s ) {
-        s = s + "HTML";
-    }
-
     public static void main(String[] args) {
-
-
-        String s1 = "hih";
-        String s2 = s1;
-
-        StringBuilder buffer =  new StringBuilder(4);
-        buffer.append( "hello" );
-
-        buffer.reverse();
-
-        System.out.println(buffer.charAt(buffer.length() - 1));
-
-
-        // if (unitTests()) {
-        //     System.out.println("All unit tests passed.\n");
-        // } else {
-        //     System.out.println("ERROR: Failed test.\n");
-        //     return;
-        // }
+        if (unitTests()) {
+            System.out.println("All unit tests passed.\n");
+        } else {
+            System.out.println("ERROR: Failed test.\n");
+            return;
+        }
     }
-}
-
-class Test {
-
-    private double i;
-
-    public Test(double i) {
-        t();
-        
-        
-    }
-
-    public Test() {
-        this(1);
-        System.out.println("Default Constructor");
-    }
-
-    public void t() {
-        System.out.println("Invokign t");
-    }
-
 }
