@@ -122,7 +122,7 @@ public class Ticket {
      * sets the description to a new value
      * @param String: the new description value
      */
-    public void setDescripton(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

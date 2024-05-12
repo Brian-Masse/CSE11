@@ -323,11 +323,37 @@ public class Assignment5 {
      * takes in the default args and runs the unit tests for each file
      */
     public static void main(String[] args) {
-        if (unitTests()) {
-            System.out.println("All unit tests passed.\n");
-        } else {
-            System.out.println("ERROR: Failed test.\n");
-            return;
-        }
+
+
+
+        // if (unitTests()) {
+        //     System.out.println("All unit tests passed.\n");
+        // } else {
+        //     System.out.println("ERROR: Failed test.\n");
+        //     return;
+        // }
+
+        SuperTest t1 = new SuperTest();
+        SubTest t2 = new SubTest();
+
+        t1.print();
+        t2.print();
     }
+}
+
+class SuperTest {
+
+    double length; 
+
+    public void print() {
+        System.out.println(test());
+    }
+
+    public int test() { return 1; }
+
+}
+
+class SubTest extends SuperTest {
+    @Override
+    public int test() {return 0;}
 }
