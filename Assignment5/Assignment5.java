@@ -333,11 +333,16 @@ public class Assignment5 {
         //     return;
         // }
 
-        SuperTest t1 = new SuperTest();
+        SuperTest t1 = new SuperTe();
         SubTest t2 = new SubTest();
 
-        t1.print();
-        t2.print();
+        System.out.println( t1.test());
+
+        Object o1 = new Object();
+        Object o2 = new Object();
+
+        System.out.println(o1.equals(o2));
+        
     }
 }
 
@@ -354,6 +359,13 @@ class SuperTest {
 }
 
 class SubTest extends SuperTest {
-    @Override
+
+    int helo;
+
     public int test() {return 0;}
+    
+}
+
+class SubTest2 extends SuperTest {
+
 }
