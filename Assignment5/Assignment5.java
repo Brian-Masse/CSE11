@@ -4,7 +4,11 @@
 //
 // Author:             Brian Masse: bmasse@ucsd.edu
 // Instructor's Name:  Ben Ochoa
+import java.io.File;
+import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Assignment5 is the main class for this assignment
@@ -318,13 +322,32 @@ public class Assignment5 {
     }
 
 
+    static void p() {
+        try {
+            String s = "5.6";
+            Integer.parseInt(s);
+        } catch (RuntimeException ex) {
+            System.out.print("runtimeP");
+        } catch (Exception ex) {
+            System.out.print("exceptionP");
+        }
+    }
+
     /**
      * the main function of this program
      * takes in the default args and runs the unit tests for each file
      */
     public static void main(String[] args) {
 
-
+        try {
+            System.out.println( "JAVA" );
+            int i = 0;
+            double y = 2.0 / i;
+            System.out.println( "HTML" );
+        } 
+        finally {
+            System.out.println( "fdone" );
+        }
 
         // if (unitTests()) {
         //     System.out.println("All unit tests passed.\n");
@@ -333,15 +356,15 @@ public class Assignment5 {
         //     return;
         // }
 
-        SuperTest t1 = new SuperTe();
-        SubTest t2 = new SubTest();
+        // SuperTest t1 = new SuperTe();
+        // SubTest t2 = new SubTest();
 
-        System.out.println( t1.test());
+        // System.out.println( t1.test());
 
-        Object o1 = new Object();
-        Object o2 = new Object();
+        // Object o1 = new Object();
+        // Object o2 = new Object();
 
-        System.out.println(o1.equals(o2));
+        // System.out.println(o1.equals(o2));
         
     }
 }
@@ -349,6 +372,8 @@ public class Assignment5 {
 class SuperTest {
 
     double length; 
+
+    File file = new File("null");
 
     public void print() {
         System.out.println(test());
