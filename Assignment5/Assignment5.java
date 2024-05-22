@@ -5,10 +5,7 @@
 // Author:             Brian Masse: bmasse@ucsd.edu
 // Instructor's Name:  Ben Ochoa
 import java.io.File;
-import java.io.PrintWriter;
-import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  * Assignment5 is the main class for this assignment
@@ -339,22 +336,12 @@ public class Assignment5 {
      */
     public static void main(String[] args) {
 
-        try {
-            System.out.println( "JAVA" );
-            int i = 0;
-            double y = 2.0 / i;
-            System.out.println( "HTML" );
-        } 
-        finally {
-            System.out.println( "fdone" );
+        if (unitTests()) {
+            System.out.println("All unit tests passed.\n");
+        } else {
+            System.out.println("ERROR: Failed test.\n");
+            return;
         }
-
-        // if (unitTests()) {
-        //     System.out.println("All unit tests passed.\n");
-        // } else {
-        //     System.out.println("ERROR: Failed test.\n");
-        //     return;
-        // }
 
         // SuperTest t1 = new SuperTe();
         // SubTest t2 = new SubTest();
