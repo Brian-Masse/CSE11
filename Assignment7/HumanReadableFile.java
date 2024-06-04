@@ -110,7 +110,7 @@ public class HumanReadableFile extends FSFile {
 
             while ( scanner.hasNextLine() ) {
                 String data = scanner.nextLine();
-                importedContent += data + "\n";
+                importedContent += data;
             }
 
             scanner.close();
@@ -131,10 +131,14 @@ public class HumanReadableFile extends FSFile {
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) { return false; }
         if ( !( obj instanceof HumanReadableFile ) ) { return false; }
         if ( !super.equals(obj) ) { return false; }
 
         HumanReadableFile humanReadableFile = (HumanReadableFile) obj;
+        if (this.contents == null && humanReadableFile.getContents() == null ) { return true; }
+        else if (this.contents == null) { return false; }
+
         if ( !this.contents.equals(humanReadableFile.getContents()) ) { return false; }
         return true;
     }

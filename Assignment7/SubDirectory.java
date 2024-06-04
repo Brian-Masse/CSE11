@@ -36,6 +36,7 @@ public class SubDirectory extends FSDirectory {
      * Public setter that sets the instance variable - parentDir
      * @param parentDir new parentDir
      */
+    @Override
     public void setParentDir( FSDirectory parentDir ) {
         this.parentDir = parentDir;
     }

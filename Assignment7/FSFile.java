@@ -74,10 +74,15 @@ public abstract class FSFile extends FSComponent  {
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) { return false; }
         if (!(obj instanceof FSFile)) { return false; }
         
         FSFile fileObj = (FSFile) obj;
         if ( !super.equals( obj ) ) { return false; }
+
+        if (this.getParentDir() == null && fileObj.getParentDir() == null ) { return true; }
+        else if (this.getParentDir() == null) { return false; }
+
         if ( !this.getParentDir().equals(fileObj.getParentDir()) ) { return false; }
         return true;
     }

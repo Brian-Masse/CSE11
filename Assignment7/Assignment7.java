@@ -1,9 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
-
-import javafx.stage.DirectoryChooser;
 
 // Main Class File:    Assignment7
 // File:               Assignment7.Java
@@ -147,7 +145,7 @@ public class Assignment7 {
         root.addComponent(dir1);
 
         FSComponent[] comps = new FSComponent[3];
-        List<FSComponent> listComps = root.getComponentList();
+        ArrayList<FSComponent> listComps = root.getComponentList();
         for ( int i =0; i < 3; i++ ) {
             comps[i] = listComps.get(i);
         }
@@ -256,7 +254,7 @@ public class Assignment7 {
         printTestingHeader("Test 6",
         "Tests imputing contents from a pre-existing file, then reoutputting it and reading it");
 
-        String expectedOutput = "picture1\npicture2\ndir1\n";
+        String expectedOutput = "picture1picture2dir1";
         
         HumanReadableFile file = new HumanReadableFile("fileName", "null");
 
@@ -281,17 +279,17 @@ public class Assignment7 {
      * @return true if all unit tests passed, false otherwise.
      */
     public static boolean unitTests() {
-        // if (!testOne()) { return false; }
+        if (!testOne()) { return false; }
 
-        // if (!testTwo()) { return false; }
+        if (!testTwo()) { return false; }
         
-        // if (!testThree()) { return false; }
+        if (!testThree()) { return false; }
 
-        // if (!testFour()) { return false; }
+        if (!testFour()) { return false; }
 
-        // if (!testFive()) { return false; }
+        if (!testFive()) { return false; }
 
-        // if (!testSix()) { return false; }
+        if (!testSix()) { return false; }
 
         return true;
     }

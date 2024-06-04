@@ -34,7 +34,7 @@ public class ArchiveFile extends FSFile {
      * @param name: the name of the file
      * @param componentArray: the archived components stored in this file
      */
-    public ArchiveFile( String name, FSComponent[] componentArray ) {
+    public ArchiveFile(String name, FSComponent[] componentArray) {
         super();
 
         String extension = ".zip";
@@ -104,7 +104,7 @@ public class ArchiveFile extends FSFile {
      * @return whether the two objects are equal
      */
     @Override
-    public boolean equals( Object obj ) {
+    public boolean equals(Object obj) {
         if ( !( obj instanceof ArchiveFile ) ) { return false; }
         if ( !(super.equals(obj)) ) { return false; }
 
