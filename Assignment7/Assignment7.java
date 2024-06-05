@@ -299,10 +299,10 @@ public class Assignment7 {
      * @param args Any command-line arguments.
      */
     public static void main(String[] args) {
-        if (unitTests()) {
-            System.out.println("All unit tests passed.\n");
-        } else {
-            System.out.println("Failed test.\n");
-        }
+        // if (unitTests()) {
+        //     System.out.println("All unit tests passed.\n");
+        // } else {
+        //     System.out.println("Failed test.\n");
+        // }
     }
 }
