@@ -26,9 +26,22 @@ public class AnimalActivities {
     private final static double MAX_HP = 15;
     private final static int MAX_STRENGTH = 10;
 
+    /**
+    * empty initialization. All the methods on this class are static,
+    * and so no instance of AnimalActivities should be created
+    */
     private AnimalActivities() {}
 
     // MARK: Fight
+    /**
+    * This function has 2 animals fight in indefinite rounds until one or both die
+    * If one animal poisons another, then even if that animal wins, 
+    * the fight will end it a draw
+    * The winning animal, if not poisoned, will eat and gain strength
+    * @param animal1: the first animal in the fight (LEFT)
+    * @param anaimal2: the second animal in the fight (RIGHT)
+    * @return: the result of the fight: 0=draw, 1: animal1, 2:animal2
+    */
     public static int fight(Animal animal1, Animal animal2) {
         boolean animal1Poisoned = animal2.poisonAnimal();
         boolean animal2Poisoned = animal1.poisonAnimal();

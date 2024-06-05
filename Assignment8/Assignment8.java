@@ -31,16 +31,25 @@ public class Assignment8 {
     // MARK: Test 1
     /**
      * Test 1
-     * Tests the equals function on files and directories
+     * Tests the basic fight methods
      * @return whether the test passed
      */
     private static boolean testOne() {
-        Animal animal1 = AnimalActivities.randomAnimal();
-        Animal animal2 = AnimalActivities.randomAnimal();
+        Animal animal1 = new Wolf(10, 100, 20);
+        Animal animal2 = new Leopard(10, 100, 50);
 
-        AnimalActivities.fight(animal1, animal2);
+        // checks to make sure every attack is within the allowed range
+        for (int i = 0; i < 100; i++) {
+            double attackStrength = animal1.attack(animal2);
+            if (attackStrength < 1 || attackStrength > 20) { return false; }
 
-        return false;
+            double attackStrength2 = animal2.attack(animal1);
+            if ( attackStrength2 < 1 || attackStrength2 > 50) { return false; }
+        }
+
+        if (animal1.getHealth() > 0 || animal2.getHealth() > 0) { return false; }
+
+        return true;
     }
 
     // MARK: Test 2
@@ -84,17 +93,6 @@ public class Assignment8 {
         return false;
     }
 
-    // MARK: 6
-    /**
-     * Test6
-     * Tests imputing contents from a pre-existing file,
-     * then reoutputting it and reading it
-     * @return whether the test passed
-     */
-    private static boolean testSix() {
-        return false;
-    }
-
     /**
      * All unit tests. This method should be executed to ensure that all
      * methods are correctly implemented.
@@ -110,8 +108,6 @@ public class Assignment8 {
         if (!testFour()) { return false; }
 
         if (!testFive()) { return false; }
-
-        if (!testSix()) { return false; }
 
         return true;
     }
