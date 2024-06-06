@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 
 // Main Class File:    Assignment7
 // File:               ArchiveFile.Java
@@ -38,7 +37,8 @@ public class ArchiveFile extends FSFile {
         super();
 
         String extension = ".zip";
-        String completeName = name.endsWith(extension) ? name : name + extension;
+        String completeName = name.endsWith(extension) ? name : name + 
+        extension;
 
         this.setName(completeName);
         this.componentArray = componentArray.clone();
@@ -72,7 +72,9 @@ public class ArchiveFile extends FSFile {
      */
     @Override
     public void outputFileContents(String outputFileName) throws Exception {
-        if (componentArray == null || componentArray.length == 0) { throw new Exception("Empty file contents!");}
+        if (componentArray == null || componentArray.length == 0) { 
+            throw new Exception("Empty file contents!");
+        }
 
         try {
             File file = new File( outputFileName );
@@ -105,15 +107,25 @@ public class ArchiveFile extends FSFile {
      */
     @Override
     public boolean equals(Object obj) {
+        if (!super.equals(obj)) { return false; }
         if ( !( obj instanceof ArchiveFile ) ) { return false; }
-        if ( !(super.equals(obj)) ) { return false; }
 
         ArchiveFile archiveFile = (ArchiveFile) obj;
 
-        if ( (this.componentArray == null && archiveFile.getComponents() == null) ) { return true; } 
-        if ( (this.componentArray == null || archiveFile.getComponents() == null) ) { return false; }
-        if ( (this.componentArray.length == archiveFile.getComponents().length ) ) {return false;}
+        if ( (this.componentArray == null &&
+            archiveFile.getComponents() == null) ) { return true; } 
 
-        return Arrays.deepEquals(componentArray, archiveFile.getComponents());
+        if ( (this.componentArray == null || 
+             archiveFile.getComponents() == null) ) { return false; }
+
+        if ( (this.componentArray.length != 
+                archiveFile.getComponents().length ) ) {return false;}
+
+        for ( int i = 0; i < this.componentArray.length; i++ ) {
+            String name1 = componentArray[i].getName();
+            String name2 = archiveFile.componentArray[i].getName();
+            if (!name1.equals(name2)) { return false; }
+        }
+        return true;
     }
 }

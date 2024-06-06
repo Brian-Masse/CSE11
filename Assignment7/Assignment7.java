@@ -1,7 +1,8 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 // Main Class File:    Assignment7
 // File:               Assignment7.Java
@@ -40,25 +41,23 @@ public class Assignment7 {
      * @return the contents of the file
      */
     private static String readFile(String fileName) throws Exception {
-        String importedContent = "";
+        StringBuilder stringBuilder = new StringBuilder(512);
+        FileInputStream inputStream = new FileInputStream(fileName);
 
         try {
-            File file = new File( fileName );
-            Scanner scanner = new Scanner(file);
-
-            while ( scanner.hasNextLine() ) {
-                String data = scanner.nextLine();
-                importedContent += data + "\n";
+            Reader r = new InputStreamReader(inputStream, "UTF-8");
+            int c = 0;
+            while ((c = r.read()) != -1) {
+                stringBuilder.append((char) c);
             }
 
-            scanner.close();
-        } catch ( FileNotFoundException e ) {
-            System.out.println( "an error occoured when accessing the file " + 
-            fileName + " " + e.getMessage() );
-            throw e;
+            r.close();
+
+        } catch (IOException e) {
+            System.out.println( e.getLocalizedMessage() );
         }
 
-        return importedContent;
+        return stringBuilder.toString();
     }
 
     // MARK: Test 1
@@ -73,9 +72,9 @@ public class Assignment7 {
 
         RootDirectory root = new RootDirectory("Home");
         HumanReadableFile pic = new HumanReadableFile("cat.png",
-                                                      "contents of picture");
+                "contents of picture");
         HumanReadableFile rice = new HumanReadableFile("rice.mp3",
-                                                      "contents of mp3 file");
+                "contents of mp3 file");
         SubDirectory music = new SubDirectory("music");
         root.addComponent(pic);
         root.addComponent(rice);
@@ -171,7 +170,8 @@ public class Assignment7 {
      */
     private static boolean testFour() {
         printTestingHeader("Test 4",
-        "Tests empty initializations for all classes + raising an exception when exporting empty content to a file");
+        "Tests empty initializations for all classes + raising" +
+        "an exception when exporting empty content to a file");
 
         HumanReadableFile humanReadableFile = new HumanReadableFile();
         ArchiveFile archiveFile = new ArchiveFile();
@@ -208,8 +208,10 @@ public class Assignment7 {
      * @return whether the test passed
      */
     private static boolean testFive() {
+
         printTestingHeader("Test 5",
-        "Tests adding files + directories of the same name to the same sub folder");
+        "Tests adding files + directories of the same name to the"
+        + "same sub folder");
 
         String file1Name = "file1.zip";
         String file2Name = "name2";
@@ -219,7 +221,8 @@ public class Assignment7 {
 
         RootDirectory root = new RootDirectory("root");
 
-        HumanReadableFile file1 = new HumanReadableFile( file1Name, "content" );
+        HumanReadableFile file1 = new HumanReadableFile( file1Name, 
+            "content" );
         ArchiveFile file2 = new ArchiveFile(file1Name, new FSComponent[0]);
         ArchiveFile file3 = new ArchiveFile(file2Name, new FSComponent[0]);
 
@@ -243,7 +246,7 @@ public class Assignment7 {
         return true;
     }
 
-    // MARK: 6
+    // MARK: Test 6
     /**
      * Test6
      * Tests imputing contents from a pre-existing file,
@@ -252,14 +255,16 @@ public class Assignment7 {
      */
     private static boolean testSix() {
         printTestingHeader("Test 6",
-        "Tests imputing contents from a pre-existing file, then reoutputting it and reading it");
+        "Tests imputing contents from a pre-existing file, then" + 
+        "reoutputting it and reading it");
 
-        String expectedOutput = "picture1picture2dir1";
-        
-        HumanReadableFile file = new HumanReadableFile("fileName", "null");
+        String expectedOutput = "picture1\npicture2\ndir1\n";
+        HumanReadableFile file = new HumanReadableFile("fileName",
+         "null");
 
         try { file.inputFileContents("archive"); }
         catch (Exception e) { System.out.println(e.getMessage()); }
+
 
         if ( !file.getContents().equals(expectedOutput) ) { return false; }
 
@@ -299,10 +304,10 @@ public class Assignment7 {
      * @param args Any command-line arguments.
      */
     public static void main(String[] args) {
-        // if (unitTests()) {
-        //     System.out.println("All unit tests passed.\n");
-        // } else {
-        //     System.out.println("Failed test.\n");
-        // }
+        if (unitTests()) {
+            System.out.println("All unit tests passed.\n");
+        } else {
+            System.out.println("Failed test.\n");
+        }
     }
 }

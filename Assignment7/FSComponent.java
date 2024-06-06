@@ -45,6 +45,14 @@ public abstract class FSComponent {
         this.name = name;
     }
 
+
+
+    /**
+     * checks whether two objects are equal
+     * they are equal if they are both an FSComponent and have the same name
+     * @param obj the other to check equivelancy
+     * @return whether the two objects equal
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof FSComponent) {
