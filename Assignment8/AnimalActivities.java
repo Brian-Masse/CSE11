@@ -53,14 +53,14 @@ public class AnimalActivities {
             printRound(round);
             printBothAnimals(animal1, animal2);
             printAttack(LEFT, animal1.attack(animal2));
-            printAttack(RIGHT, animal1.attack(animal1));
+            printAttack(RIGHT, animal2.attack(animal1));
             
             round += 1;
         }
 
         printFinalStats(animal1, animal2, animal1Poisoned || animal2Poisoned);
 
-        if (animal1.getHealth() < 0 && animal2.getHealth() < 0) {
+        if (animal1.getHealth() <= 0 && animal2.getHealth() <= 0) {
             printTieGame();
             return 0;
         }
@@ -105,6 +105,7 @@ public class AnimalActivities {
         if ( animal1.getAge() <= 5 || animal2.getAge() <= 5 ) {
             return null;
         }
+
         if ( !animal1.sameSpecies(animal2) ) {
             return null;
         }

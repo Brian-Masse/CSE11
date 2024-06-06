@@ -4,6 +4,7 @@
 //
 // Author:             Brian Masse: bmasse@ucsd.edu
 // Instructor's Name:  Ben Ochoa
+
 /**
  * 
  * Assignment5 is the main class for this assignment
@@ -28,6 +29,14 @@ public class Assignment8 {
         System.out.println( "------------------------\n" );
     }
 
+    /**
+     * helper function that prints that a test was successful
+     * @param methodName: the method you are testing
+     */
+    public static void printTestSucceeded(String methodName) {
+        System.out.println( methodName + " Succeeded!\n" );
+    }
+
     // MARK: Test 1
     /**
      * Test 1
@@ -35,6 +44,9 @@ public class Assignment8 {
      * @return whether the test passed
      */
     private static boolean testOne() {
+        String methodName = "unit Test 1";
+        printTestingHeader(methodName, "Testing the attack / fight methods");
+
         Animal animal1 = new Wolf(10, 100, 20);
         Animal animal2 = new Leopard(10, 100, 50);
 
@@ -49,48 +61,157 @@ public class Assignment8 {
 
         if (animal1.getHealth() > 0 || animal2.getHealth() > 0) { return false; }
 
+        printTestSucceeded(methodName);
         return true;
     }
 
     // MARK: Test 2
     /**
      * Test2
-     * tests the outputFileContents method on file
+     * tests all the sleep functions inrease the strength the same
      * @return whether the test passed
      */
     private static boolean testTwo() {
-        return false;
+        String methodName = "unit Test 2";
+        printTestingHeader(methodName, "testing the sleep funtions correctly increment the strength of each different animal");
+
+        Animal wolf     = new Wolf(10, 100, 10);
+        Animal leopard  = new Leopard(10, 100, 10);
+        Animal cobra    = new Cobra(10, 100, 10);
+        Animal toad     = new Toad(10, 100, 10);
+        Animal panda    = new Panda(10, 100, 10);
+        Animal zebra    = new Zebra(10, 100, 10);
+
+        wolf.sleep();
+        leopard.sleep();
+        cobra.sleep();
+        toad.sleep();
+        panda.sleep();
+        zebra.sleep();
+            
+        if ( wolf.getStrength() != 16 ) { return false; };
+        if ( leopard.getStrength() != 15 ) { return false; };
+        if ( cobra.getStrength() != 17 ) { return false; };
+        if ( toad.getStrength() != 12 ) { return false; };
+        if ( zebra.getStrength() != 13 ) { return false; };
+        if ( panda.getStrength() != 14 ) { return false; };
+
+        printTestSucceeded(methodName);
+        return true;
     }
 
     // MARK: Test 3
     /**
      * Test3
-     * Tests the initialization + output method for archived Files
+     * Tests the validity of the reproduce method
      * @return whether the test passed
      */
     private static boolean testThree() {
-        return false;
+        String methodName = "unit Test 3";
+        printTestingHeader(methodName, "Tests the edge cases of the reproduce"+
+            " function, and checks when a baby is returned, it has the" + 
+            " correct instance props");
+
+        Wolf wolf = new Wolf(10, 10, 10);
+        Wolf wolf2 = new Wolf(10, 10, 100);
+        Wolf wolf3 = new Wolf(3, 10, 10);
+        Panda panda = new Panda(10, 10, 10);
+
+        Animal baby1 = AnimalActivities.reproduce(wolf, wolf3);
+        Animal baby2 = AnimalActivities.reproduce(wolf, wolf2);
+        Animal baby3 = AnimalActivities.reproduce(wolf, panda);
+
+        if ( baby1 != null ) { return false; }
+        if ( baby3 != null ) { return false; }
+
+        if ( baby2.getStrength() != 27.5 || baby2.getHealth() != 100 || baby2.getAge() != 0 ) { return false; }
+
+        printTestSucceeded(methodName);
+        return true;
     }
 
     // MARK: Test 4
     /**
+     * Helper function to check the poison rate
+     * simulates 1000 poison attemp and determines how many were successful
+     * to generate an empirical estimate at the poison rate
+     * @param animal the poisonous animal
+     * @return the poison rate %
+     */
+    private static double testPoisonRate(Animal animal) {
+        int timesPoisoined = 0;
+
+        for ( int i = 0; i < 1000; i++ ) {
+            if (animal.poisonAnimal()) {
+                timesPoisoined++;
+            }
+        }
+
+        return timesPoisoined / 10;
+    }
+    
+    /**
      * Test4
-     * Tests empty initializations for all classes + raising an
-     * exception when exporting empty content to a file
+     * Tests the poison ability
+     * and that the poison chance is within a certain range
      * @return whether the test passed
      */
     private static boolean testFour() {
-        return false;
+        String methodName = "unit Test 4";
+        printTestingHeader(methodName, "tests that the chance of poisoning" +
+                                        " are within a certain range");
+
+        Toad toad = new Toad(10, 10, 10);
+        Cobra cobra = new Cobra(10, 10, 10);
+
+        // check that the poison rates are close to what they should be
+        System.out.println( "Poison Rate of Toad: [30%] " + testPoisonRate(toad) + "%" );
+        System.out.println( "Poison Rate of Cobra: [80%] " + testPoisonRate(cobra) + "%" );
+
+        return true;
     }
 
     // MARK: Test 5
     /**
      * Test5
-     * Tests adding files + directories of the same name to the same sub folder
+     * Tests the eat method for all the animals
      * @return whether the test passed
      */
     private static boolean testFive() {
-        return false;
+        String methodName = "unit Test 5";
+        printTestingHeader(methodName, "tests the eat method for all animals");
+
+        Wolf wolf = new Wolf(10, 10, 100);
+
+        Leopard leopard  = new Leopard(10, 100, 10);
+        Cobra cobra    = new Cobra(10, 100, 10);
+        Toad toad     = new Toad(10, 100, 10);
+        Panda panda    = new Panda(10, 100, 10);
+        Zebra zebra    = new Zebra(10, 100, 10);
+
+        leopard.eatAnimal(wolf);
+        cobra.eatAnimal(wolf);
+        toad.eatAnimal(wolf);
+        wolf.eatAnimal(wolf);
+        panda.eatPlant();
+        zebra.eatPlant();
+
+        System.out.println(wolf.getStrength());
+        System.out.println(leopard.getStrength());
+        System.out.println(cobra.getStrength());
+
+        double toadStrength = toad.getStrength();
+        double pandaStrength = panda.getStrength();
+        double zebraStrength = zebra.getStrength();
+
+        if ( 10 > toadStrength || toadStrength > 310 ) { return false; }
+        if ( 10 > pandaStrength || pandaStrength > 60 ) { return false; }
+        if ( 10 > zebraStrength || zebraStrength > 50 ) { return false; }
+
+
+        printTestSucceeded(methodName);
+        return true;
+
     }
 
     /**

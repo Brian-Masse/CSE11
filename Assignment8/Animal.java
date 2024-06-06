@@ -101,6 +101,8 @@ public abstract class Animal {
      * @return the amount of damage done to the other animal
      */
     public double attack(Animal animal) {
+        if (this.getStrength() == 0) { return 0; }
+
         double min = 1;
         double max = this.getStrength();
 
