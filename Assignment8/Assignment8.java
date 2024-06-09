@@ -4,6 +4,11 @@
 //
 // Author:             Brian Masse: bmasse@ucsd.edu
 // Instructor's Name:  Ben Ochoa
+
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
 /**
  * 
  * Assignment5 is the main class for this assignment
@@ -121,10 +126,12 @@ public class Assignment8 {
      * @param args Any command-line arguments.
      */
     public static void main(String[] args) {
-        if (unitTests()) {
-            System.out.println("All unit tests passed.\n");
-        } else {
-            System.out.println("Failed test.\n");
-        }
+        // if (unitTests()) {
+        //     System.out.println("All unit tests passed.\n");
+        // } else {
+        //     System.out.println("Failed test.\n");
+        // }
+
+        DataInputStream d = new FileInput
     }
 }
