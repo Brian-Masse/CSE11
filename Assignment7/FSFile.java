@@ -11,7 +11,6 @@
  * All files contain a parentDir and a name
  * @author Brian Masse
  */
-import java.util.ArrayList;
 
 public abstract class FSFile extends FSComponent  {
 
@@ -74,23 +73,24 @@ public abstract class FSFile extends FSComponent  {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) { return false; }
-        if (!(obj instanceof FSFile)) { return false; }
-        
+        if ( !(obj instanceof FSFile) ) { return false; }
+        if ( !super.equals(obj) ) { return false; }
+
         FSFile fileObj = (FSFile) obj;
-        if ( !super.equals( obj ) ) { return false; }
 
-        if (this.getParentDir() == null && fileObj.getParentDir() == null ) { return true; }
-        else if (this.getParentDir() == null) { return false; }
+        if (this.parentDir == null && fileObj.getParentDir() == null) { return true; } 
+        if ( this.parentDir == null || fileObj.getParentDir() == null ) {
+            return false;
+        }
 
-        if ( !this.getParentDir().equals(fileObj.getParentDir()) ) { return false; }
-        return true;
+        return this.parentDir.equals(fileObj.getParentDir());
     }
 
     /**
      * Abstract definition of a method that outputs the contents of a file
      * implemented in concrete subclasses
      */
-    public abstract void outputFileContents(String outputFileName) throws Exception;
+    public abstract void outputFileContents(String outputFileName)
+     throws Exception;
 
 }

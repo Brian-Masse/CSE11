@@ -1,8 +1,10 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.Reader;
 
 // Main Class File:    Assignment7
 // File:               HumanReadableFile.Java
@@ -74,7 +76,9 @@ public class HumanReadableFile extends FSFile {
      */
     @Override
     public void outputFileContents(String outputFileName) throws Exception {
-        if (contents == null || contents.isEmpty()) { throw new Exception("Empty file contents!");}
+        if (contents == null || contents.isEmpty()) { 
+            throw new Exception("Empty file contents!");
+        }
 
         try {
             File file = new File( outputFileName );
@@ -102,25 +106,23 @@ public class HumanReadableFile extends FSFile {
      * @param inputFileName the name of the file to import the contents from
      */
     public void inputFileContents(String inputFileName) throws Exception {
-        String importedContent = "";
+        StringBuilder stringBuilder = new StringBuilder(512);
+        FileInputStream inputStream = new FileInputStream(inputFileName);
 
         try {
-            File file = new File( inputFileName );
-            Scanner scanner = new Scanner(file);
-
-            while ( scanner.hasNextLine() ) {
-                String data = scanner.nextLine();
-                importedContent += data;
+            Reader r = new InputStreamReader(inputStream, "UTF-8");
+            int c = 0;
+            while ((c = r.read()) != -1) {
+                stringBuilder.append((char) c);
             }
 
-            scanner.close();
-        } catch ( FileNotFoundException e ) {
-            System.out.println( "an error occoured when accessing the file " + 
-            inputFileName + " " + e.getMessage() );
-            throw e;
+            r.close();
+
+        } catch (IOException e) {
+            System.out.println( e.getLocalizedMessage() );
         }
 
-        this.contents = importedContent;
+        this.contents = stringBuilder.toString();
     }
 
     /**
@@ -131,15 +133,20 @@ public class HumanReadableFile extends FSFile {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) { return false; }
-        if ( !( obj instanceof HumanReadableFile ) ) { return false; }
+
+        if ( !(obj instanceof HumanReadableFile) ) { return false; }
         if ( !super.equals(obj) ) { return false; }
 
         HumanReadableFile humanReadableFile = (HumanReadableFile) obj;
-        if (this.contents == null && humanReadableFile.getContents() == null ) { return true; }
-        else if (this.contents == null) { return false; }
 
-        if ( !this.contents.equals(humanReadableFile.getContents()) ) { return false; }
-        return true;
+        if (this.contents == null && humanReadableFile.getContents() == null) { 
+            return true; 
+        } 
+        if ( this.contents == null || humanReadableFile.getContents() == null ) 
+        {
+            return false;
+        }
+
+        return this.contents.equals(humanReadableFile.getContents());
     }
 }

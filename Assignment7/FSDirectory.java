@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -120,7 +119,8 @@ public abstract class FSDirectory extends FSComponent {
      * @param outputFileName the name of the file to put the contents in
      */
     public void outputComponentNames(String outputFileName) throws Exception {
-        if (componentList == null || componentList.size() == 0) { throw new Exception("Empty file contents!");}
+        if (componentList == null || componentList.size() == 0) { 
+            throw new Exception("Empty file contents!");}
 
         try {
             File file = new File( outputFileName );
@@ -158,7 +158,17 @@ public abstract class FSDirectory extends FSComponent {
         if ( !super.equals(obj) ) { return false; }
 
         FSDirectory directory = (FSDirectory) obj;
-        if ( !Arrays.deepEquals(this.componentList.toArray(), directory.componentList.toArray()) ) { return false; }
+
+        if (this.componentList.size() != directory.componentList.size()) { 
+            return false; 
+        }
+
+        for ( int i = 0; i < this.componentList.size(); i++ ) {
+            String name1 = componentList.get(i).getName();
+            String name2 = directory.componentList.get(i).getName();
+            if (!name1.equals(name2)) { return false; }
+        }
+
         return true;
     }
 }

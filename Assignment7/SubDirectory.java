@@ -72,9 +72,13 @@ public class SubDirectory extends FSDirectory {
 
         SubDirectory subDirectory = (SubDirectory) obj;
 
+        if (this.parentDir == null && subDirectory.getParentDir() == null) { 
+            return true; 
+        } 
         if ( this.parentDir == null || subDirectory.getParentDir() == null ) {
             return false;
         }
-        return true;
+
+        return this.parentDir.equals(subDirectory.getParentDir());
     }
 }

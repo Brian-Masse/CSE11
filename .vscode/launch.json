@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Assignment8",
+      "request": "launch",
+      "mainClass": "Assignment8",
+      "projectName": "CSE12_61c16c7b"
+    },
+    {
+      "type": "java",
       "name": "Test",
       "request": "launch",
       "mainClass": "Test",
