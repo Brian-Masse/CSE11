@@ -1,2 +1,2 @@
-# CSE12
-Course work for the UCSD CSE 12 class
+# CSE11
+Course work for the UCSD CSE11 class
